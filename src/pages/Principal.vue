@@ -1,24 +1,20 @@
 <template>
   <div>
-    <table>
+    <table class="table">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Fecha</th>
-          <th>Tipo</th>
-          <th>Ley</th>
-          <th>Información</th>
+          <th>uid</th>
+          <th>Nombre Español </th>
+          <th>Nombre Ingles</th>
+          <th>Nombre Latin</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="feriado in feriados" :key="feriado.id">
-          <td>{{ feriado.id }}</td>
-          <td>{{ feriado.nombre }}</td>
-          <td>{{ feriado.fecha }}</td>
-          <td>{{ feriado.tipo }}</td>
-          <td>{{ feriado.ley }}</td>
-          <td>{{ feriado.info }}</td>
+        <tr v-for="bird in birds" :key="bird.id">
+          <td>{{ bird.uid }}</td>
+          <td>{{ bird.name.spanish }}</td>
+          <td>{{ bird.name.english }}</td>
+          <td>{{ bird.name.latin }}</td>
         </tr>
       </tbody>
     </table>
@@ -27,35 +23,26 @@
 
 <script>
 import axios from 'axios';
+
 export default {
-name:"PaginaPrincipal",
-data() {
+  name:"PaginaPrincipal",
+  data() {
     return {
-      feriados: [],
+      birds: [],
     };
   },
   mounted() {
-    this.getFeriados();
-  },
-  methods: {
-    getFeriados() {
-      axios.get('https://apis.digital.gob.cl/fl/feriados')
-        .then(response => {
+    axios.get('https://aves.ninjas.cl/api/birds')
+      .then(response => {
+        this.birds = response.data;
 
-
-
-          this.feriados = response.data;
-
-          console.log(this.feriados)
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.error(error);
+      });
   },
 };
-
-
 </script>
 
 <style>
