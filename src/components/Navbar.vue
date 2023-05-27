@@ -4,8 +4,10 @@
     <span class="navbar-text">
       
       <h1>Pajaros Chilenos</h1>
-      
     </span>
+  
+    <a href="/" class="btn btn-info" role="button">Ir a la página principal</a>
+
   </div>
 </nav>
 </template>
